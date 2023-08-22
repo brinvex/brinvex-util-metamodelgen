@@ -8,8 +8,8 @@ to easily generate metamodel classes having static fields which represent instan
 ### Maven dependency declaration
 ````
 <repository>
-    <id>brinvex-mvn-repo-public</id>
-    <url>https://github.com/brinvex/brinvex-mvn-repo-public/raw/main/</url>
+    <id>brinvex-mvnrepo</id>
+    <url>https://github.com/brinvex/brinvex-mvnrepo/raw/main/</url>
     <snapshots>
         <enabled>true</enabled>
         <updatePolicy>always</updatePolicy>
