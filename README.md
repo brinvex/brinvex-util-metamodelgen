@@ -5,35 +5,57 @@
 Brinvex-Util-Metamodelgen is a compact Java library which enables developers
 to easily generate metamodel classes having static fields which represent instance fields of underlying class.
 
-### Maven dependency declaration
+### Maven configuration
+````
+<properties>
+    <brinvex-util-metamodelgen.version>1.0.0</brinvex-util-metamodelgen.version>
+</properties>
+````
 ````
 <repository>
-    <id>brinvex-mvnrepo</id>
-    <url>https://github.com/brinvex/brinvex-mvnrepo/raw/main/</url>
+    <id>brinvex-repo</id>
+    <name>Brinvex Repository</name>
+    <url>https://github.com/brinvex/brinvex-repo/raw/main/</url>
     <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
+        <enabled>false</enabled>
     </snapshots>
 </repository>
-
+````
+````
 <dependency>
     <groupId>com.brinvex.util</groupId>
     <artifactId>brinvex-util-metamodelgen-annotations</artifactId>
-    <version>1.0.0</version>
+    <version>${brinvex-util-metamodelgen.version}</version>
     <scope>provided</scope>
-    <optional>true</optional>
-</dependency>
-<dependency>
-    <groupId>com.brinvex.util</groupId>
-    <artifactId>brinvex-util-metamodelgen-processor</artifactId>
-    <scope>provided</scope>
-    <version>1.0.0</version>
     <optional>true</optional>
 </dependency>
 ````
+````
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>com.brinvex.util</groupId>
+                        <artifactId>brinvex-util-metamodelgen-processor</artifactId>
+                        <version>${brinvex-util-metamodelgen.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+                <annotationProcessors>
+                    <annotationProcessor>com.brinvex.util.metamodelgen.processor.MetamodelGenerator</annotationProcessor>
+                </annotationProcessors>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
+````
 ### Example
 
-Put ``@GeneratePropNamesMetamodel`` on your some POJO
+Put ``@GeneratePropNamesMetamodel`` on some POJO
 ````java
 @GeneratePropNamesMetamodel
 public class Person {
